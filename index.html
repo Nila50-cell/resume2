@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NILAMESH PANDA - Resume</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    color: #333;
+    background: linear-gradient(-45deg, #1e3c72, #2a5298, #4facfe, #00f2fe);
+    background-size: 400% 400%;
+    animation: gradientMove 15s ease infinite;
+  }
+  @keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  header {
+    color: #fff;
+    text-align: center;
+    padding: 70px 20px 50px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .welcome {
+    font-size: 1.8em;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #ffeb3b;
+    position: relative;
+    z-index: 2;
+    opacity: 0;
+    transform: translateX(-100%);
+    animation: slideIn 1.5s ease forwards, glow 1.5s infinite alternate;
+    transition: opacity 1s ease-in-out;
+  }
+  .welcome.fade-out { opacity: 0; visibility: hidden; }
+  @keyframes slideIn { 0% { transform: translateX(-100%); opacity: 0; } 100% { transform: translateX(0); opacity: 1; } }
+  @keyframes glow { 0% { text-shadow: 0 0 5px #ffeb3b, 0 0 10px #ffeb3b; } 100% { text-shadow: 0 0 15px #fff176, 0 0 30px #ffeb3b; } }
+
+  header h1 {
+    font-size: 3em;
+    margin: 0 0 10px;
+    z-index: 2;
+    position: relative;
+    animation: float 4s ease-in-out infinite, nameGlow 2s ease-in-out infinite alternate;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  @keyframes nameGlow {
+    0% { text-shadow: 0 0 10px #00f2fe, 0 0 20px #4facfe; }
+    100% { text-shadow: 0 0 20px #00f2fe, 0 0 40px #4facfe; }
+  }
+
+  header p {
+    font-size: 1.2em;
+    position: relative;
+    z-index: 2;
+    animation: fadeIn 2s ease-in-out;
+  }
+
+  .code-animation {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    opacity: 0.15; font-family: monospace; font-size: 18px; color: #ff0000;
+    white-space: pre-line; overflow: hidden; animation: scrollCode 20s linear infinite;
+  }
+  @keyframes scrollCode { 0% { transform: translateY(100%); } 100% { transform: translateY(-100%); } }
+
+  .social-links { margin-top: 10px; position: relative; z-index: 2; }
+  .social-links a {
+    display: inline-block;
+    margin: 0 10px;
+    color: #fff;
+    font-size: 28px;
+    transition: transform 0.3s, color 0.3s;
+    animation: bounce 2s infinite;
+  }
+  .social-links a:hover {
+    color: #ffeb3b;
+    transform: scale(1.3);
+  }
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
+  }
+
+  .container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px;
+  }
+  .section {
+    background: rgba(255,255,255,0.9);
+    border-radius: 15px;
+    padding: 20px;
+    margin: 30px 0;
+    opacity: 0;
+    transform: scale(0.9) translateY(40px);
+    transition: all 0.8s ease-out;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  }
+  .section.visible {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  .section-title {
+    font-size: 2em;
+    margin-bottom: 20px;
+    border-bottom: 3px solid #4facfe;
+    display: inline-block;
+    padding-bottom: 5px;
+  }
+
+  ul { list-style: none; padding: 0; }
+  li { margin: 10px 0; font-size: 1.1em; }
+
+  .skills-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px;
+  }
+  .skill-box {
+    background: #fff; padding: 15px; text-align: center; border-radius: 10px;
+    font-weight: bold; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease; cursor: pointer;
+  }
+  .skill-box:hover {
+    background: #e3f2fd; color: #007bff;
+    box-shadow: 0 0 20px #00f2fe, 0 0 40px #4facfe; transform: scale(1.05);
+  }
+
+  .language-grid { display: flex; flex-wrap: wrap; gap: 15px; }
+  .language-box {
+    background: #fff; padding: 12px 20px; text-align: center; border-radius: 50px;
+    font-weight: bold; color: #d32f2f; border: 2px solid #d32f2f;
+    transition: all 0.3s ease; cursor: pointer; animation: pulse 2s infinite;
+  }
+  .language-box:hover {
+    background: #ffeaea; box-shadow: 0 0 20px #ff1744, 0 0 40px #d50000; transform: scale(1.08);
+  }
+  @keyframes pulse { 0% { box-shadow: 0 0 10px #ff1744; } 50% { box-shadow: 0 0 30px #d50000; } 100% { box-shadow: 0 0 10px #ff1744; } }
+
+  .grid-list {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px;
+  }
+  .card {
+    background: #fff; padding: 15px; border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); text-align: center;
+    font-weight: bold; transition: all 0.3s ease; cursor: pointer; font-size: 1em;
+  }
+  .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px #00f2fe, 0 0 50px #4facfe;
+  }
+
+  /* Award Buttons */
+  .button-group {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .award-btn {
+    background: #fff;
+    color: #d32f2f;
+    border: 2px solid #d32f2f;
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    animation: pulse 2s infinite;
+    transition: all 0.3s ease;
+  }
+
+  .award-btn:hover {
+    background: #ffeaea;
+    box-shadow: 0 0 20px #ff1744, 0 0 40px #d50000;
+    transform: scale(1.08);
+  }
+
+  .year {
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #555;
+  }
+
+  .card a {
+    color: #007bff; text-decoration: none; display: block;
+  }
+  .card a:hover { color: #004085; text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+<header>
+  <div class="code-animation" id="code-animation">// Code Loading...</div>
+  <div class="welcome" id="welcome">Welcome to my profile</div>
+  <h1>NILAMESH PANDA</h1>
+  <p>Email: <a href="mailto:nilameshpanda@gmail.com" style="color:#fff;">nilameshpanda@gmail.com</a> | Phone: 9635518680</p>
+  
+  <div class="social-links">
+    <a href="https://www.linkedin.com/in/nilamesh-panda-a732252a3" target="_blank"><i class="fab fa-linkedin"></i></a>
+    <a href="https://www.facebook.com/nilamesh.panda?mibextid=ZbWKwL" target="_blank"><i class="fab fa-facebook"></i></a>
+    <a href="https://www.instagram.com/pandanilamesh6?igsh=amhlOHF0MnBuZ2o=" target="_blank"><i class="fab fa-instagram"></i></a>
+    <a href="https://wa.me/919635518680" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    <a href="mailto:nilameshpanda@gmail.com"><i class="fas fa-envelope"></i></a>
+  </div>
+</header>
+
+<div class="container">
+  <div class="section">
+    <div class="section-title">Summary</div>
+    <p>Passionate and detail-oriented Computer Science graduate with strong foundations in programming, web development, and emerging technologies. Skilled in problem-solving, leadership, and teamwork with an eagerness to learn and adapt to new challenges.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Education</div>
+    <ul>
+      <li><strong>2013</strong> - SRI RAMKRISHNA NIRMAL CHITTA PATHASHRAM — Primary</li>
+      <li><strong>2016</strong> - CHANDPUR HAROCHARAN VIDYAMANDIR (H.S) — Madhyamik (Class 7)</li>
+      <li><strong>2019</strong> - DIGHA VIDYABHAWAN — Madhyamik (2019), Higher Secondary (2020)</li>
+      <li><strong>2021 - 2024</strong> - BELDA COLLEGE — B.Sc(H) in Computer Science (Expected 2024)</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Skills</div>
+    <div class="skills-grid">
+      <div class="skill-box">HTML</div><div class="skill-box">CSS</div><div class="skill-box">JavaScript</div><div class="skill-box">Python</div>
+      <div class="skill-box">Project Management</div><div class="skill-box">Public Relations</div><div class="skill-box">Teamwork</div>
+      <div class="skill-box">Time Management</div><div class="skill-box">Leadership</div><div class="skill-box">Effective Communication</div>
+      <div class="skill-box">Critical Thinking</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Languages</div>
+    <div class="language-grid">
+      <div class="language-box">English</div>
+      <div class="language-box">Bengali</div>
+      <div class="language-box">Hindi</div>
+    </div>
+  </div>
+
+  <div class="section certificates">
+    <div class="section-title">Certificates</div>
+    <div class="grid-list">
+      <div class="card"><a href="https://www.linkedin.com/posts/nilamesh-panda-a732252a3_got-from-kg-coding-on-html-activity-7171511557795799041-cIYD" target="_blank">HTML Certificate – KG Coding</a></div>
+      <div class="card"><a href="https://www.linkedin.com/posts/nilamesh-panda-a732252a3_greatlearningacademy-greatlearning-glacertificate-activity-7255199607389921280-gmLX" target="_blank">Introduction to Information Security – Great Learning Academy</a></div>
+      <div class="card"><a href="https://www.linkedin.com/posts/nilamesh-panda-a732252a3_chatgpt-for-beginners-course-completion-certificate-activity-7246926016676257793-pueT" target="_blank">ChatGPT for Beginners – Great Learning</a></div>
+      <div class="card"><a href="https://www.linkedin.com/posts/nilamesh-panda-a732252a3_greatlearningacademy-greatlearning-glacertificate-activity-7247227230341242881-6MrM" target="_blank">Artificial Intelligence Fundamentals – Great Learning Academy</a></div>
+      <div class="card"><a href="https://www.life-global.org/certificate/846fb8d5-4452-4770-9b5e-b610c561c20b" target="_blank">AI for Beginners – HP Life & HP Foundation</a></div>
+      <div class="card"><a href="https://www.life-global.org/certificate/d9a06be9-410e-4618-a4a9-463cad5040d6" target="_blank">Data Science & Analytics – HP Life & HP Foundation</a></div>
+      <div class="card"><a href="https://www.linkedin.com/posts/nilamesh-panda-a732252a3_one-more-certificate-in-my-bag-activity-7332280441997090816-TG1R" target="_blank">Introduction to Critical Infrastructure Protection</a></div>
+    </div>
+  </div>
+
+  <div class="section awards">
+    <div class="section-title">Awards</div>
+    <div class="grid-list">
+
+      <div class="card">
+        1st place holder in English exam
+        <div class="button-group">
+          <a href="https://drive.google.com/file/d/1neZDleE5kLWPog4eTemwO_bSwijJy_i4/view?usp=drivesdk" target="_blank">
+            <button class="award-btn">GO</button>
+          </a>
+          <a href="https://drive.google.com/file/d/1nq1NkLeE3j6G3zFOzCTQq5uF2V4Oj8jW/view?usp=drivesdk" target="_blank">
+            <button class="award-btn">GO</button>
+          </a>
+        </div>
+        <div class="year">2013 & 2014</div>
+      </div>
+
+      <div class="card">
+        2nd place holder in Drawing Competition – BANGIYA SANGEET PARISHAD
+        <div class="button-group">
+          <a href="https://drive.google.com/file/d/1nD2msGIzayUuSP7rghkUP8-YGKWR3-iq/view?usp=drivesdk" target="_blank">
+            <button class="award-btn">GO</button>
+          </a>
+        </div>
+        <div class="year">2015</div>
+      </div>
+
+      <div class="card">
+        A++ grade holder in Talent Search Examination – ERDS, W.B.
+        <div class="button-group">
+          <a href="https://drive.google.com/file/d/1nX0psJA1GCIVfKYxbcaNPD7FIlvA54hV/view?usp=drivesdk" target="_blank">
+            <button class="award-btn">GO</button>
+          </a>
+        </div>
+        <div class="year">2017</div>
+      </div>
+
+      <div class="card">
+        Extra Award / Special Mention
+        <div class="button-group">
+          <a href="https://drive.google.com/file/d/1nWNHmWpAP59_Ym6suFOYBu53VgDBc8fV/view?usp=drivesdk" target="_blank">
+            <button class="award-btn">GO</button>
+          </a>
+        </div>
+        <div class="year">Year Not Mentioned</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  const sections = document.querySelectorAll('.section');
+  window.addEventListener('scroll', () => {
+    const triggerBottom = window.innerHeight * 0.85;
+    sections.forEach(section => {
+      const sectionTop = section.getBoundingClientRect().top;
+      if(sectionTop < triggerBottom){ section.classList.add('visible'); }
+    });
+  });
+
+  const codeLines = [
+    'function greet() {','  console.log("Hello, World!");','}',
+    'const skills = ["HTML","CSS","JavaScript","Python"];','skills.forEach(skill => console.log(skill));',
+    'let developer = { name:"Nilamesh Panda", role:"Web Developer"};'
+  ];
+  document.getElementById('code-animation').textContent = codeLines.join('\n');
+
+  setTimeout(()=>{ document.getElementById('welcome').classList.add('fade-out'); }, 5000);
+</script>
+</body>
+</html>
